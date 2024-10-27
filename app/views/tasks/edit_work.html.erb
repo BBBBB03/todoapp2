@@ -1,0 +1,105 @@
+<head>
+  <style>
+    /* General Settings */
+    body {
+      font-family: 'Verdana', sans-serif;
+      background: linear-gradient(to right, #eef2f3, #8e9eab);
+      color: #222;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .edit-task-container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.15);
+      width: 90%;
+      max-width: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    h1 {
+      text-align: left;
+      font-size: 2.4rem;
+      color: #2c3e50;
+      margin-bottom: 25px;
+      border-bottom: 2px solid #bdc3c7;
+      padding-bottom: 10px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 15px;
+    }
+
+    .task-label {
+      font-size: 1.1rem;
+      color: #555;
+      font-weight: 700;
+    }
+
+    .task-input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      color: #333;
+      transition: border-color 0.25s ease;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .task-input:focus {
+      border-color: #007acc;
+      outline: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .update-btn {
+      background-color: #007acc;
+      border: none;
+      padding: 14px;
+      color: white;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.25s ease, transform 0.1s ease;
+      font-weight: 700;
+      align-self: center;
+      width: 60%;
+    }
+
+    .update-btn:hover {
+      background-color: #005e99;
+      transform: translateY(-2px);
+    }
+
+    .update-btn:active {
+      transform: translateY(1px);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="edit-task-container">
+    <h1>Edit Task</h1>
+
+    <%= form_with model: @task, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :name, "Task Name", class: "task-label" %>
+        <%= f.text_field :name, class: "task-input" %>
+        <%= f.label :category_id, "Category", class: "task-label" %>
+        <%= f.collection_select :category_id, @categories, :id, :name, prompt: "Select Category", class: "task-input" %>
+        <%= f.submit "Update Task", class: "update-btn" %>
+      </div>
+    <% end %>
+  </div>
+</body>

@@ -1,0 +1,158 @@
+<h1 class="title"><%= @category.name %> - Tasks</h1>
+
+<div class="task-container">
+  <div class="task-section incomplete-tasks">
+    <h2 class="section-title">Incomplete Tasks</h2>
+    <div class="task-list">
+      <% @tasks.each do |task| %>
+        <% if task.incomplete? %>
+          <div class="task-card">
+            <span class="task-name"><%= task.name %></span>
+            <div class="task-buttons">
+              <%= button_to "Complete", complete_task_path(task), method: :patch, class: "btn btn-complete" %>
+              <%= button_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-delete" %>
+              <%= link_to "Edit", edit_task_path(task), class: "btn btn-edit" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="task-section complete-tasks">
+    <h2 class="section-title">Complete Tasks</h2>
+    <div class="task-list">
+      <% @tasks.each do |task| %>
+        <% if task.complete? %>
+          <div class="task-card complete-task">
+            <span class="task-name"><%= task.name %></span>
+            <div class="task-buttons">
+              <%= button_to "Incomplete", incomplete_task_path(task), method: :patch, class: "btn btn-incomplete" %>
+              <%= button_to "Delete", task_path(task), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-delete" %>
+              <%= link_to "Edit", edit_task_path(task), class: "btn btn-edit" %>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* General Settings */
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 20px;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+
+  /* Task Container */
+  .task-container {
+    display: flex; /* Flexbox for horizontal layout */
+    justify-content: space-between; /* Space between the sections */
+    gap: 20px; /* Space between sections */
+  }
+
+  /* Task Section Styles */
+  .task-section {
+    flex: 1; /* Each section takes equal space */
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    color: #2980b9;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  /* Task List Styles */
+  .task-list {
+    display: flex;
+    flex-direction: column; /* Stack cards vertically */
+    gap: 15px; /* Space between cards */
+  }
+
+  .task-card {
+    background-color: #e7f3fe; /* Light blue background for tasks */
+    padding: 15px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between; /* Space between task name and buttons */
+    align-items: center;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow for cards */
+  }
+
+  .task-card.complete-task {
+    background-color: #d4edda; /* Light green for completed tasks */
+  }
+
+  .task-name {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    flex-grow: 1; /* Allow task name to take up available space */
+  }
+
+  /* Button Styles */
+  .task-buttons {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+  }
+
+  .btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    color: white;
+  }
+
+  /* Button Colors */
+  .btn-complete {
+    background-color: #27ae60; /* Green for complete */
+  }
+
+  .btn-complete:hover {
+    background-color: #2ecc71; /* Lighter green on hover */
+  }
+
+  .btn-incomplete {
+    background-color: #f39c12; /* Orange for incomplete */
+  }
+
+  .btn-incomplete:hover {
+    background-color: #e67e22; /* Lighter orange on hover */
+  }
+
+  .btn-delete {
+    background-color: #e74c3c; /* Red for delete */
+  }
+
+  .btn-delete:hover {
+    background-color: #c0392b; /* Darker red on hover */
+  }
+
+  .btn-edit {
+    background-color: #2980b9; /* Blue for edit */
+  }
+
+  .btn-edit:hover {
+    background-color: #3498db; /* Lighter blue on hover */
+  }
+</style>
+  

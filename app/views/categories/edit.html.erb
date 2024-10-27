@@ -1,0 +1,122 @@
+<head>
+  <title>Edit Category</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <style>
+    /* General Settings */
+    body {
+      font-family: 'Arial', sans-serif; /* Clean sans-serif font */
+      background: #e9ecef; /* Light gray background */
+      color: #212529; /* Dark text color */
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh; /* Full viewport height */
+    }
+
+    .container {
+      background-color: #ffffff; /* White container */
+      padding: 30px;
+      border-radius: 12px; /* Rounded corners */
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2); /* Soft shadow */
+      width: 90%; /* Responsive width */
+      max-width: 500px; /* Maximum width */
+      display: flex;
+      flex-direction: column; /* Vertical layout */
+      align-items: center; /* Center items */
+    }
+
+    h1.title {
+      text-align: center;
+      font-size: 2.2rem; /* Larger title */
+      margin-bottom: 25px; /* Space below title */
+      color: #007bff; /* Bright blue color */
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column; /* Stack elements vertically */
+      gap: 15px; /* Space between inputs */
+      width: 100%; /* Full width of container */
+    }
+
+    .task-label {
+      font-size: 1.1rem; /* Medium size label */
+      color: #495057; /* Darker gray */
+      font-weight: 500; /* Medium weight */
+    }
+
+    .task-input {
+      padding: 12px; /* Padding for input */
+      border: 1px solid #ced4da; /* Light border */
+      border-radius: 8px; /* Rounded corners */
+      font-size: 1rem; /* Standard input size */
+      color: #495057; /* Darker text color */
+      transition: border-color 0.3s ease; /* Smooth transition */
+    }
+
+    .task-input:focus {
+      border-color: #007bff; /* Change border color on focus */
+      outline: none; /* No outline */
+      box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
+    }
+
+    .create-btn {
+      background-color: #007bff; /* Bright blue button */
+      border: none;
+      padding: 12px; /* Padding for button */
+      color: white; /* White text */
+      border-radius: 8px; /* Rounded corners */
+      font-size: 1.1rem; /* Button text size */
+      cursor: pointer; /* Pointer on hover */
+      transition: background-color 0.3s ease, transform 0.1s ease; /* Smooth transition */
+      font-weight: 500; /* Medium weight */
+      width: 100%; /* Full width */
+    }
+
+    .create-btn:hover {
+      background-color: #0056b3; /* Darker blue on hover */
+      transform: translateY(-2px); /* Slight lift effect */
+    }
+
+    .create-btn:active {
+      transform: translateY(1px); /* Pressed effect */
+    }
+
+    .back-link {
+      display: block;
+      margin-top: 20px; /* Space above link */
+      text-align: center; /* Center text */
+      font-size: 1rem; /* Regular link size */
+      color: #007bff; /* Bright blue */
+      text-decoration: none; /* No underline */
+      transition: color 0.3s ease; /* Smooth color change */
+    }
+
+    .back-link:hover {
+      color: #0056b3; /* Darker blue on hover */
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h1 class="title">Edit Category</h1>
+
+    <%= form_with model: @category, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :name, "Category Name", class: "task-label" %>
+        <%= f.text_field :name, class: "task-input" %>
+        <%= f.submit "Update Category", class: "create-btn" %>
+      </div>
+    <% end %>
+
+    <%= link_to "Back to Categories", categories_path, class: "back-link" %>
+  </div>
+</body>
